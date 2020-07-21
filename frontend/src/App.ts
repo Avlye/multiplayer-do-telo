@@ -30,13 +30,11 @@ const game: Game = {
   },
 };
 
-function clearScreen() {
-  context.fillStyle = 'white'
-  context.fillRect(0, 0, 10, 10)
-}
-
 function renderScreen() {
-  clearScreen()
+  if (!context) return;
+
+  context.fillStyle = 'white'
+  context.clearRect(0, 0, 10, 10)
 
   for (const playerID in game.players) {
     const player = game.players[playerID]

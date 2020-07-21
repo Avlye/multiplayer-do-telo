@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "strict": true,
     "target": "ES6",
     "module": "commonjs",
     "lib": ["ES6", "DOM"],
