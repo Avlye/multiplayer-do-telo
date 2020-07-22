@@ -5,7 +5,9 @@ class Game {
     document.getElementById('screen')
   );
 
-  context: CanvasRenderingContext2D = this.screen.getContext('2d')!;
+  context: CanvasRenderingContext2D = this.screen.getContext('2d');
+
+  // TODO: Add players, fruits dynamically
   state: GameState = {
     players: {
       player1: { x: 1, y: 1 },
@@ -20,8 +22,11 @@ class Game {
   movePlayer = (command: Command) => {
     console.log(`Moving ${command.playerID} with ${command.keyPressed}`);
 
-    const { keyPressed } = command;
-    const player = this.state.players[command.playerID];
+    // command { playerID: string, keypressed: string }
+    const { keyPressed, playerID } = command;
+
+    // get { [`player1`] as player } from players object
+    const { [playerID]: player } = this.state.players;
 
     if (keyPressed === 'ArrowUp' && player.y - 1 >= 0) {
       player.y = player.y - 1;
