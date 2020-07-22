@@ -1,6 +1,5 @@
+import GameTransform from './GameTransform';
+
 export default interface GameObject {
-  [key: string]: {
-    x: number;
-    y: number;
-  };
+  [key: string]: GameTransform;
 }

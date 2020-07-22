@@ -1,4 +1,5 @@
 import GameState from '../@types/GameState';
+import GameObjectTransform from '../@types/GameTransform';
 
 class Game {
   screen: HTMLCanvasElement = <HTMLCanvasElement>(
@@ -19,6 +20,40 @@ class Game {
     },
   };
 
+  acceptedMoves = {
+    ArrowUp(player: GameObjectTransform) {
+      console.log('Moving player UP');
+
+      if (player.y - 1 >= 0) {
+        player.y -= 1;
+      }
+    },
+
+    ArrowDown(player: GameObjectTransform) {
+      console.log('Moving player DOWN');
+
+      if (player.y + 1 <= screen.height) {
+        player.y += 1;
+      }
+    },
+
+    ArrowLeft(player: GameObjectTransform) {
+      console.log('Moving player LEFT');
+
+      if (player.x - 1 >= 0) {
+        player.x -= 1;
+      }
+    },
+
+    ArrowRight(player: GameObjectTransform) {
+      console.log('Moving player RIGHT');
+
+      if (player.x + 1 <= screen.width) {
+        player.x += 1;
+      }
+    },
+  };
+
   movePlayer = (command: Command) => {
     console.log(`Moving ${command.playerID} with ${command.keyPressed}`);
 
@@ -28,24 +63,10 @@ class Game {
     // get { [`player1`] as player } from players object
     const { [playerID]: player } = this.state.players;
 
-    if (keyPressed === 'ArrowUp' && player.y - 1 >= 0) {
-      player.y = player.y - 1;
-      return;
-    }
+    const moveFunction = this.acceptedMoves[keyPressed];
 
-    if (keyPressed === 'ArrowLeft' && player.x - 1 >= 0) {
-      player.x = player.x - 1;
-      return;
-    }
-
-    if (keyPressed === 'ArrowDown' && player.y + 1 <= screen.height) {
-      player.y = player.y + 1;
-      return;
-    }
-
-    if (keyPressed === 'ArrowRight' && player.x + 1 <= screen.width) {
-      player.x = player.x + 1;
-      return;
+    if (typeof moveFunction === 'function') {
+      moveFunction(player);
     }
   };
 
