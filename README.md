@@ -8,7 +8,8 @@ This repo is inspired by [Filipe Deschamps tutorial series](https://www.youtube.
 
 As an entry-level software developer, I have tried so many game engines, including [Scratch](https://scratch.mit.edu/), [Unity](https://unity.com/), and [Unreal Engine](https://www.unrealengine.com/).
 
-I decided to create an alternative version from his tutorial to learn some foundations of software developing, starting applying what I learned from TypeScript and trying to recreate some design features of previous game engines that I already used.
+I decided to create an alternative version from his tutorial to learn some foundations of software development.
+I started to apply what I learned from TypeScript and recreating some design choices of previous game engines that I already used.
 
 ## Front End
 
