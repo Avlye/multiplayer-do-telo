@@ -1,6 +1,7 @@
 import Game from './Game';
 
 class Keyboard {
+  game: Game;
   currentPlayer = 'player1';
 
   constructor(game: Game) {
