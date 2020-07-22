@@ -10,27 +10,13 @@ class Keyboard {
 
   handleKeyDown = (event: KeyboardEvent) => {
     const keyPressed = event.key;
-    const player = this.game.players[this.currentPlayer];
 
-    if (keyPressed === 'ArrowUp' && player.y - 1 >= 0) {
-      player.y -= 1;
-      return;
-    }
+    const command = {
+      playerID: 'player1',
+      keyPressed,
+    };
 
-    if (keyPressed === 'ArrowDown' && player.y + 1 < screen.height) {
-      player.y += 1;
-      return;
-    }
-
-    if (keyPressed === 'ArrowLeft' && player.x - 1 >= 0) {
-      player.x -= 1;
-      return;
-    }
-
-    if (keyPressed === 'ArrowRight' && player.x + 1 < screen.width) {
-      player.x += 1;
-      return;
-    }
+    this.game.movePlayer(command);
   };
 }
 
