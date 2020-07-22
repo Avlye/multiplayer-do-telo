@@ -2,11 +2,11 @@ import GameState from '../@types/GameState';
 import GameObjectTransform from '../@types/GameTransform';
 
 class Game {
-  screen: HTMLCanvasElement = <HTMLCanvasElement>(
+  canvas: HTMLCanvasElement = <HTMLCanvasElement>(
     document.getElementById('screen')
   );
 
-  context: CanvasRenderingContext2D = this.screen.getContext('2d');
+  context: CanvasRenderingContext2D = this.canvas.getContext('2d');
 
   // TODO: Add players, fruits dynamically
   state: GameState = {
@@ -23,34 +23,25 @@ class Game {
   acceptedMoves = {
     ArrowUp: (player: GameObjectTransform) => {
       console.log('Moving player UP');
-
-      if (player.y - 1 >= 0) {
-        player.y -= 1;
-      }
+      player.y = Math.max(player.y - 1, 0);
     },
 
     ArrowDown: (player: GameObjectTransform) => {
       console.log('Moving player DOWN');
 
-      if (player.y + 1 < this.screen.height) {
-        player.y += 1;
-      }
+      player.y = Math.min(player.y + 1, this.canvas.height);
     },
 
     ArrowLeft: (player: GameObjectTransform) => {
       console.log('Moving player LEFT');
 
-      if (player.x - 1 >= 0) {
-        player.x -= 1;
-      }
+      player.x = Math.max(player.x - 1, 0);
     },
 
     ArrowRight: (player: GameObjectTransform) => {
       console.log('Moving player RIGHT');
 
-      if (player.x + 1 < this.screen.width) {
-        player.x += 1;
-      }
+      player.x = Math.min(player.x + 1, this.canvas.width);
     },
   };
 
