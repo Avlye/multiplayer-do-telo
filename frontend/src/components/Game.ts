@@ -61,6 +61,10 @@ class Game {
     );
   };
 
+  findPlayer = (command: Command) => {
+    return this.state.players.find((player) => player.id === command.playerID);
+  };
+
   addFruit = (command: Command) => {
     const { fruitID, fruitX, fruitY } = command;
 
@@ -78,23 +82,22 @@ class Game {
     );
   };
 
-  checkForFruitCollision = () => {
-    const { players, fruits } = this.state;
+  checkForFruitCollision = (playerID: string) => {
+    const player = this.findPlayer({ playerID });
+    const { fruits } = this.state;
 
-    players.map((player: GameObject) => {
-      fruits.map((fruit: GameObject) => {
-        console.log(`Checking ${player.id} and ${fruit.id}`);
+    fruits.map((fruit: GameObject) => {
+      console.log(`Checking ${player.id} and ${fruit.id}`);
 
-        if (
-          player.transform.x === fruit.transform.x &&
-          player.transform.y === fruit.transform.y
-        ) {
-          console.log(`COLLISION between ${player.id} and ${fruit.id}`);
-          this.removeFruit({
-            fruitID: fruit.id,
-          });
-        }
-      });
+      if (
+        player.transform.x === fruit.transform.x &&
+        player.transform.y === fruit.transform.y
+      ) {
+        console.log(`COLLISION between ${player.id} and ${fruit.id}`);
+        this.removeFruit({
+          fruitID: fruit.id,
+        });
+      }
     });
   };
 
@@ -103,12 +106,12 @@ class Game {
 
     const { playerID, keyPressed } = command;
 
-    const player = this.state.players.find((p) => playerID === p.id);
+    const player = this.findPlayer({ playerID });
     const moveFunction = this.acceptedMoves[keyPressed];
 
     if (player && typeof moveFunction === 'function') {
       moveFunction(player);
-      this.checkForFruitCollision();
+      this.checkForFruitCollision(playerID);
     }
   };
 

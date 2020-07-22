@@ -4,6 +4,7 @@ import './scss/main.scss';
 
 const game = new Game();
 game.addPlayer({ playerID: 'player1', playerX: 0, playerY: 1 });
+game.addPlayer({ playerID: 'player2', playerX: 4, playerY: 1 });
 
 game.addFruit({ fruitID: 'fruit1', fruitX: 2, fruitY: 1 });
 game.addFruit({ fruitID: 'fruit2', fruitX: 3, fruitY: 4 });
