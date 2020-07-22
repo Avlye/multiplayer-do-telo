@@ -1,8 +1,7 @@
 {
   "compilerOptions": {
-    "strict": true,
-    "target": "ES2017",
-    "lib": ["ES2017", "DOM"],
+    "target": "ES6",
+    "lib": ["ES6", "DOM"],
     "baseUrl": "./src/",
     "outDir": "./dist/",
     "typeRoots": ["./node_modules/@types", "./src/@types"],
