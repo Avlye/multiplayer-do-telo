@@ -21,7 +21,7 @@ class Game {
   };
 
   acceptedMoves = {
-    ArrowUp(player: GameObjectTransform) {
+    ArrowUp: (player: GameObjectTransform) => {
       console.log('Moving player UP');
 
       if (player.y - 1 >= 0) {
@@ -29,15 +29,15 @@ class Game {
       }
     },
 
-    ArrowDown(player: GameObjectTransform) {
+    ArrowDown: (player: GameObjectTransform) => {
       console.log('Moving player DOWN');
 
-      if (player.y + 1 <= screen.height) {
+      if (player.y + 1 < this.screen.height) {
         player.y += 1;
       }
     },
 
-    ArrowLeft(player: GameObjectTransform) {
+    ArrowLeft: (player: GameObjectTransform) => {
       console.log('Moving player LEFT');
 
       if (player.x - 1 >= 0) {
@@ -45,10 +45,10 @@ class Game {
       }
     },
 
-    ArrowRight(player: GameObjectTransform) {
+    ArrowRight: (player: GameObjectTransform) => {
       console.log('Moving player RIGHT');
 
-      if (player.x + 1 <= screen.width) {
+      if (player.x + 1 < this.screen.width) {
         player.x += 1;
       }
     },
