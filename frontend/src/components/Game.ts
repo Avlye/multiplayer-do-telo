@@ -1,5 +1,5 @@
 import Command from '../@types/Command';
-import GameObject from '../@types/GameObject';
+import GameObject, { GameObjectTransform } from '../@types/GameObject';
 
 class Game {
   canvas = <HTMLCanvasElement>document.getElementById('canvas');
@@ -10,35 +10,48 @@ class Game {
     fruits: GameObject[];
   } = { players: [], fruits: [] };
 
+  constrains = (position: GameObjectTransform) => {
+    position.x = Math.min(Math.max(position.x, 0), this.canvas.width - 1);
+    position.y = Math.min(Math.max(position.y, 0), this.canvas.height - 1);
+
+    return position;
+  };
+
   acceptedMoves = {
     ArrowUp: (player: GameObject) => {
-      console.log('Moving player UP');
+      console.info(`Moving #${player.id} -> UP`);
 
-      player.transform.y = Math.max(player.transform.y - 1, 0);
+      player.transform = this.constrains({
+        x: player.transform.x,
+        y: player.transform.y - 1,
+      });
     },
 
     ArrowDown: (player: GameObject) => {
-      console.log('Moving player DOWN');
+      console.info(`Moving #${player.id} -> DOWN`);
 
-      player.transform.y = Math.min(
-        player.transform.y + 1,
-        this.canvas.height - 1,
-      );
+      player.transform = this.constrains({
+        x: player.transform.x,
+        y: player.transform.y + 1,
+      });
     },
 
     ArrowLeft: (player: GameObject) => {
-      console.log('Moving player LEFT');
+      console.info(`Moving #${player.id} -> LEFT`);
 
-      player.transform.x = Math.max(player.transform.x - 1, 0);
+      player.transform = this.constrains({
+        x: player.transform.x - 1,
+        y: player.transform.y,
+      });
     },
 
     ArrowRight: (player: GameObject) => {
-      console.log('Moving player RIGHT');
+      console.info(`Moving #${player.id} -> RIGHT`);
 
-      player.transform.x = Math.min(
-        player.transform.x + 1,
-        this.canvas.width - 1,
-      );
+      player.transform = this.constrains({
+        x: player.transform.x + 1,
+        y: player.transform.y,
+      });
     },
   };
 
