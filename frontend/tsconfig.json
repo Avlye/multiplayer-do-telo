@@ -1,19 +1,11 @@
 {
   "compilerOptions": {
     "strict": true,
-    "target": "ES6",
-    "module": "commonjs",
-    "lib": ["ES6", "DOM"],
-    "outDir": "./dist",
-    "removeComments": true,
-    "baseUrl": "./src",
-    "typeRoots": [
-      "./node_modules/@types",
-      "./src/@types"
-    ],
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true
+    "target": "ES2017",
+    "lib": ["ES2017", "DOM"],
+    "baseUrl": "./src/",
+    "outDir": "./dist/",
+    "typeRoots": ["./node_modules/@types", "./src/@types"],
+    "importHelpers": true
   }
 }
