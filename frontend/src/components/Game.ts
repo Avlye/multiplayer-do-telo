@@ -1,5 +1,5 @@
-import GameState from '../@types/GameState';
-import GameObjectTransform from '../@types/GameTransform';
+import Command from '../@types/Command';
+import GameObject from '../@types/GameObject';
 
 class Game {
   canvas: HTMLCanvasElement = <HTMLCanvasElement>(
@@ -7,52 +7,48 @@ class Game {
   );
 
   context: CanvasRenderingContext2D = this.canvas.getContext('2d');
-
-  // TODO: Add players, fruits dynamically
-  state: GameState = {
-    players: {
-      player1: { x: 1, y: 1 },
-      player2: { x: 3, y: 3 },
-    },
-    fruits: {
-      fruit1: { x: 3, y: 1 },
-      fruit2: { x: 4, y: 4 },
-    },
+  state: {
+    players: GameObject[];
+    fruits: GameObject[];
+  } = {
+    players: [{ id: 'player1', transform: { x: 1, y: 1 } }],
+    fruits: [
+      { id: 'fruit1', transform: { x: 1, y: 5 } },
+      { id: 'fruit2', transform: { x: 9, y: 5 } },
+    ],
   };
 
   acceptedMoves = {
-    ArrowUp: (player: GameObjectTransform) => {
+    ArrowUp: (player: GameObject) => {
       console.log('Moving player UP');
-      player.y = Math.max(player.y - 1, 0);
+
+      player.transform.y = Math.max(player.transform.y - 1, 0);
     },
 
-    ArrowDown: (player: GameObjectTransform) => {
+    ArrowDown: (player: GameObject) => {
       console.log('Moving player DOWN');
 
-      player.y = Math.min(player.y + 1, this.canvas.height);
+      player.transform.y = Math.min(player.transform.y + 1, this.canvas.height);
     },
 
-    ArrowLeft: (player: GameObjectTransform) => {
+    ArrowLeft: (player: GameObject) => {
       console.log('Moving player LEFT');
 
-      player.x = Math.max(player.x - 1, 0);
+      player.transform.x = Math.max(player.transform.x - 1, 0);
     },
 
-    ArrowRight: (player: GameObjectTransform) => {
+    ArrowRight: (player: GameObject) => {
       console.log('Moving player RIGHT');
 
-      player.x = Math.min(player.x + 1, this.canvas.width);
+      player.transform.x = Math.min(player.transform.x + 1, this.canvas.width);
     },
   };
 
   movePlayer = (command: Command) => {
     console.log(`Moving ${command.playerID} with ${command.keyPressed}`);
 
-    // command { playerID: string, keypressed: string }
-    const { keyPressed, playerID } = command;
-
-    // get { [`player1`] as player } from players object
-    const { [playerID]: player } = this.state.players;
+    const { playerID, keyPressed } = command;
+    const player = this.state.players.find((player) => player.id === playerID);
 
     const moveFunction = this.acceptedMoves[keyPressed];
 
@@ -71,14 +67,14 @@ class Game {
       let player = players[playerID];
 
       this.context.fillStyle = 'black';
-      this.context.fillRect(player.x, player.y, 1, 1);
+      this.context.fillRect(player.transform.x, player.transform.y, 1, 1);
     }
 
     for (const fruitID in fruits) {
       const fruit = fruits[fruitID];
 
       this.context.fillStyle = 'green';
-      this.context.fillRect(fruit.x, fruit.y, 1, 1);
+      this.context.fillRect(fruit.transform.x, fruit.transform.y, 1, 1);
     }
 
     requestAnimationFrame(this.renderScreen);

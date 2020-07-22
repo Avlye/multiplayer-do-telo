@@ -1,3 +1,4 @@
+import Command from '../@types/Command';
 import Game from './Game';
 
 class Keyboard {
