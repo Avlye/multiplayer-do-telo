@@ -2,7 +2,7 @@
 
 This repo is inspired by [Filipe Deschamps tutorial series](https://www.youtube.com/playlist?list=PLMdYygf53DP5SVQQrkKCVWDS0TwYLVitL).
 
-![Filipe Deschamps tutorial series](https://i.ytimg.com/vi/0sTfIZvjYJk/hqdefault.jpg?sqp=-oaymwEXCNACELwBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLAuVGGkhLXQ-nIBIC5ENWwl-UEfiA)
+[![Filipe Deschamps tutorial series](https://i.ytimg.com/vi/0sTfIZvjYJk/hqdefault.jpg?sqp=-oaymwEXCNACELwBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLAuVGGkhLXQ-nIBIC5ENWwl-UEfiA)](https://www.youtube.com/playlist?list=PLMdYygf53DP5SVQQrkKCVWDS0TwYLVitL)
 
 # Motivations
 
