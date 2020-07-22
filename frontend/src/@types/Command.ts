@@ -5,7 +5,7 @@ export default interface Command {
   playerX?: number;
   playerY?: number;
 
-  fruitsID?: string;
-  fruitsX?: number;
-  fruitsY?: number;
+  fruitID?: string;
+  fruitX?: number;
+  fruitY?: number;
 }
