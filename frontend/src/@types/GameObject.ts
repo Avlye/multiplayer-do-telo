@@ -1,8 +1,9 @@
+export interface GameObjectTransform {
+  x: number;
+  y: number;
+}
+
 export default interface GameObject {
   id: string;
-
-  transform: {
-    x: number;
-    y: number;
-  };
+  transform: GameObjectTransform;
 }

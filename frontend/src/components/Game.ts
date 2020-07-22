@@ -10,13 +10,7 @@ class Game {
   state: {
     players: GameObject[];
     fruits: GameObject[];
-  } = {
-    players: [{ id: 'player1', transform: { x: 1, y: 1 } }],
-    fruits: [
-      { id: 'fruit1', transform: { x: 1, y: 5 } },
-      { id: 'fruit2', transform: { x: 9, y: 5 } },
-    ],
-  };
+  } = { players: [], fruits: [] };
 
   acceptedMoves = {
     ArrowUp: (player: GameObject) => {
@@ -28,7 +22,10 @@ class Game {
     ArrowDown: (player: GameObject) => {
       console.log('Moving player DOWN');
 
-      player.transform.y = Math.min(player.transform.y + 1, this.canvas.height);
+      player.transform.y = Math.min(
+        player.transform.y + 1,
+        this.canvas.height - 1,
+      );
     },
 
     ArrowLeft: (player: GameObject) => {
@@ -40,19 +37,39 @@ class Game {
     ArrowRight: (player: GameObject) => {
       console.log('Moving player RIGHT');
 
-      player.transform.x = Math.min(player.transform.x + 1, this.canvas.width);
+      player.transform.x = Math.min(
+        player.transform.x + 1,
+        this.canvas.width - 1,
+      );
     },
+  };
+
+  addPlayer = (command: Command) => {
+    const { playerID, playerX, playerY } = command;
+
+    this.state.players.push({
+      id: playerID,
+      transform: { x: playerX, y: playerY },
+    });
+  };
+
+  removePlayer = (command: Command) => {
+    const { playerID } = command;
+
+    this.state.players = this.state.players.filter(
+      (player) => player.id !== playerID,
+    );
   };
 
   movePlayer = (command: Command) => {
     console.log(`Moving ${command.playerID} with ${command.keyPressed}`);
 
     const { playerID, keyPressed } = command;
-    const player = this.state.players.find((player) => player.id === playerID);
 
+    const player = this.state.players.find((p) => playerID === p.id);
     const moveFunction = this.acceptedMoves[keyPressed];
 
-    if (typeof moveFunction === 'function') {
+    if (player && typeof moveFunction === 'function') {
       moveFunction(player);
     }
   };
