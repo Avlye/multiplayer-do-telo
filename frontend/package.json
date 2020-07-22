@@ -12,7 +12,6 @@
     "typescript": "^3.9.7"
   },
   "dependencies": {
-    "components": "^0.1.0",
     "tslib": "^2.0.0"
   }
 }
