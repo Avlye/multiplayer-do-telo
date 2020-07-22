@@ -5,5 +5,7 @@ import './scss/main.scss';
 const game = new Game();
 const keyboard = new Keyboard(game);
 
-document.addEventListener('keydown', keyboard.handleKeyDown);
+const keyboardListener = keyboard.createKeyboardListener();
+keyboardListener.subscribe(game.movePlayer);
+
 game.renderScreen();

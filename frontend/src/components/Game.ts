@@ -17,7 +17,7 @@ class Game {
     },
   };
 
-  movePlayer(command: { playerID: string; keyPressed: string }) {
+  movePlayer = (command: Command) => {
     console.log(`Moving ${command.playerID} with ${command.keyPressed}`);
 
     const { keyPressed } = command;
@@ -42,7 +42,7 @@ class Game {
       player.x = player.x + 1;
       return;
     }
-  }
+  };
 
   renderScreen = () => {
     const { players, fruits } = this.state;
