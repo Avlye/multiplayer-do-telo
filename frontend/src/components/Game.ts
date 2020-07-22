@@ -93,6 +93,13 @@ class Game {
     );
   };
 
+  isCollision = (
+    object: GameObjectTransform,
+    otherObject: GameObjectTransform,
+  ) => {
+    return object.x === otherObject.x && object.y === otherObject.y;
+  };
+
   checkForFruitCollision = (playerID: string) => {
     const player = this.findPlayer({ playerID });
     const { fruits } = this.state;
@@ -100,11 +107,9 @@ class Game {
     fruits.map((fruit: GameObject) => {
       console.log(`Checking ${player.id} and ${fruit.id}`);
 
-      if (
-        player.transform.x === fruit.transform.x &&
-        player.transform.y === fruit.transform.y
-      ) {
-        console.log(`COLLISION between ${player.id} and ${fruit.id}`);
+      if (this.isCollision(player.transform, fruit.transform)) {
+        console.info(`COLLISION between ${player.id} and ${fruit.id}`);
+
         this.removeFruit({
           fruitID: fruit.id,
         });
