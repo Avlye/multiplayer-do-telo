@@ -3,7 +3,7 @@ import GameObjectTransform from '../@types/GameTransform';
 
 class Game {
   canvas: HTMLCanvasElement = <HTMLCanvasElement>(
-    document.getElementById('screen')
+    document.getElementById('canvas')
   );
 
   context: CanvasRenderingContext2D = this.canvas.getContext('2d');
