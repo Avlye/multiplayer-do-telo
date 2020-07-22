@@ -54,9 +54,26 @@ class Game {
   };
 
   removePlayer = (command: Command) => {
+    const { fruitsID } = command;
+
+    this.state.fruits = this.state.fruits.filter(
+      (fruit) => fruit.id !== fruitsID,
+    );
+  };
+
+  addFruit = (command: Command) => {
+    const { fruitsID, fruitsX, fruitsY } = command;
+
+    this.state.fruits.push({
+      id: fruitsID,
+      transform: { x: fruitsX, y: fruitsY },
+    });
+  };
+
+  removeFruit = (command: Command) => {
     const { playerID } = command;
 
-    this.state.players = this.state.players.filter(
+    this.state.fruits = this.state.players.filter(
       (player) => player.id !== playerID,
     );
   };
@@ -80,19 +97,15 @@ class Game {
     this.context.fillStyle = 'white';
     this.context.clearRect(0, 0, 10, 10);
 
-    for (const playerID in players) {
-      let player = players[playerID];
-
+    players.forEach((player) => {
       this.context.fillStyle = 'black';
       this.context.fillRect(player.transform.x, player.transform.y, 1, 1);
-    }
+    });
 
-    for (const fruitID in fruits) {
-      const fruit = fruits[fruitID];
-
+    fruits.forEach((fruit) => {
       this.context.fillStyle = 'green';
       this.context.fillRect(fruit.transform.x, fruit.transform.y, 1, 1);
-    }
+    });
 
     requestAnimationFrame(this.renderScreen);
   };
