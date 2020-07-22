@@ -2,11 +2,9 @@ import Command from '../@types/Command';
 import GameObject from '../@types/GameObject';
 
 class Game {
-  canvas: HTMLCanvasElement = <HTMLCanvasElement>(
-    document.getElementById('canvas')
-  );
-
+  canvas = <HTMLCanvasElement>document.getElementById('canvas');
   context: CanvasRenderingContext2D = this.canvas.getContext('2d');
+
   state: {
     players: GameObject[];
     fruits: GameObject[];
@@ -118,15 +116,17 @@ class Game {
   renderScreen = () => {
     const { players, fruits } = this.state;
 
+    // Clear Canvas Board
     this.context.fillStyle = 'white';
     this.context.clearRect(0, 0, 10, 10);
 
-    players.forEach((player) => {
+    // Renders each player & fruit
+    players.map((player) => {
       this.context.fillStyle = 'black';
       this.context.fillRect(player.transform.x, player.transform.y, 1, 1);
     });
 
-    fruits.forEach((fruit) => {
+    fruits.map((fruit) => {
       this.context.fillStyle = 'green';
       this.context.fillRect(fruit.transform.x, fruit.transform.y, 1, 1);
     });
